@@ -1,0 +1,14 @@
+{
+  "name": "express_practice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "express_practice.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Usman Sajid",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
