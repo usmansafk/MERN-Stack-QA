@@ -1,0 +1,146 @@
+use document_practice;
+
+db.people.insertOne(
+   {
+    "firstName": "Usman",
+    "surname": "Sajid",
+    "age": 23,
+    "height": 170,
+    "hobbies":  [
+        "Gaming",
+        "Boxing",
+        "Working Out",
+        "Coding
+    ]   
+})
+
+db.people.insertMany(
+[
+    {
+        "firstName": "Jordan",
+        "surname": "Harrison",
+        "age": 25,
+        "height": 182,
+        "hobbies":  [
+            "Gaming",
+            "Reading",
+            "Writing course-ware"
+        ]   
+    },
+    {
+        "firstName": "Bill",
+        "surname": "Smith",
+        "age": 28,
+        "height": 167,
+        "hobbies":  [
+            "Philately",
+            "Knitting"
+        ]   
+    },
+    {
+        "firstName": "Ben",
+        "surname": "Smith",
+        "age": 32,
+        "height": 157,
+        "hobbies":  [
+            "Poker",
+            "Blackjack"
+        ]   
+    },
+    {
+        "firstName": "Sally",
+        "surname": "Brown",
+        "age": 34,
+        "height": 189,
+        "hobbies":  [
+            "Football",
+            "Air Guitar",
+            "Climbing"
+        ]   
+    },
+    {
+        "firstName": "Emily",
+        "surname": "Poole",
+        "age": 42,
+        "height": 174,
+        "hobbies":  [
+            "Go-Karting",
+            "Ultimate Frisbee"
+        ]   
+    }
+])
+
+db.people.updateOne(
+    {
+        "firstName": "Ben",
+        "surname": "Smith"
+    },
+    {
+        "$push": {
+            "hobbies": "Roulette"
+        }
+    }
+)
+
+db.people.updateOne(
+    {
+        firstName: "Sally",
+        surname: "Brown"
+    },
+    { 
+        $pull: { 
+            hobbies: {
+                $in: ["Air Guitar"]
+                    }
+            }
+    }
+)
+
+db.people.find(
+    {
+        "age": {
+            "$gte": 30
+            }
+    }
+)
+
+db.people.find(
+    {
+        "age": {"$lte": 30}
+    },
+    {
+        "_id": false,
+        "firstName": true,
+        "surname": true
+    }
+)
+
+db.people.updateMany(
+    {
+        "age": {"$gte": 30}
+    },
+    {
+        "$set": {"glasses": true}
+    }
+)
+
+db.people.deleteMany(
+    {
+        "glasses": {"$ne": true}
+    }
+)
+
+db.people.updateOne(
+    {
+        "firstName": "Ben"
+    },
+    {
+        "$set": {
+            "pet": {
+                "name": "Rex",
+                "age": 12,
+                "species": "dog"
+            }
+        }
+    }
+)

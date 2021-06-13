@@ -1,0 +1,137 @@
+//CREATE AND USE DB 
+use student_record;
+
+//CREATE ONE
+db.student.insertOne({
+    "firstName" : "Usman",
+    "lastName" : "Sajid",
+    "age" : 23,
+    "skills" : [
+        "java",
+        "html",
+        "css",
+        "javascript"
+    ]
+})
+
+----------------------------
+//READ ALL
+db.student.find() 
+
+//READ ALL WITH NICE FORMATTING
+db.student.find().pretty()
+----------------------------
+//CREATING MANY
+db.student.insertMany(
+    [
+        {
+         "firstName" : "Hope",
+         "lastName" : "Saeng",
+         "age" : 32,
+         "skills" : [
+            "js",
+            "css",
+            "dancing",
+            ]
+        },
+        {
+         "firstName" : "Rija",
+         "lastName" : "Sajid",
+         "age" : 23,
+         "skills" : [
+            "cooking",
+            "working out",
+            "dancing",
+            ]
+        }
+    ]   
+)
+
+----------------------------
+//UPDATING ONE
+db.student.updateOne(
+    {
+        "firstName" : "Usman",
+        "lastName" : "Sajid"
+    },
+    {
+        "$push": {
+            "skills": "eating" 
+        }
+    }
+)
+----------------------------
+//REMOVING ONE
+db.student.updateOne(
+    {
+        "firstName" : "Usman",
+        "lastName" : "Sajid"
+    },
+    {
+        "$pull": {
+            "skills": "eating" 
+        }
+    }
+)
+
+----------------------------
+//FIND EVERYONE WHO IS OVER AGE 30
+
+db.student.find(
+    {
+        "age":{
+            "$gt":30
+        }
+    }
+).pretty()
+----------------------------
+//FIND EVERYONE WHO IS UNDER OR EQUAL TO AGE 23 AND SHOW ONLY FIRST NAME, AND NOT THE ID
+//error with this one*
+db.student.find(
+    {
+        "age":{
+            "$lt":23
+        },
+        {
+            "_id":false,
+            "firstName":true
+        }
+    }
+).pretty()
+
+-----------------------------
+//FIND EVERYONE WHO IS OVER THE AGE OF 30 AND GIVE THEM GLASSES
+db.student.updateMany(
+    {
+        "age": {"$gt":30}
+    },
+    {
+        "$set": {
+            "glasses" : true
+        }
+    }
+)
+
+-----------------------------
+//UPDATE USMANS DOCUMENT WITH *EMBEDDED DOCUMENT*  TO HOLD DETAILS OF HIS CAR
+
+db.student.updateOne(
+    {
+        "firstName":"Usman"
+    },
+    {
+        "$set":{
+            "car": {
+                "name":"BMW",
+                "model":"318d",
+                "colour":"white"
+            }
+        }
+    }
+)
+
+
+
+
+
+
